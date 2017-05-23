@@ -1,0 +1,26 @@
+unsigned long duration;
+int photoInterruptorPin = 3;
+unsigned long before = 0,cur=0;
+unsigned long period = 0;
+unsigned long dur = 0;
+unsigned long beforedur = 0;
+double pi = 3.14;
+double length = 0.5;
+void setup()
+{
+  pinMode (photoInterruptorPin, INPUT);
+  Serial.begin(9600);
+}
+void loop()
+{
+  duration = pulseIn(photoInterruptorPin, HIGH);
+  if (duration > 0) {
+      cur=millis();
+      dur=(cur - before);
+      period = (dur+beforedur);
+      Serial.println(period);
+      before=cur;
+      beforedur=dur;
+    }
+}
+
